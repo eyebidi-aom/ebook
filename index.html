@@ -164,7 +164,54 @@
     @media (max-width: 400px) { .back-btn { padding: 0 18px; font-size: 23px; } .fs-btn { width: 54px; height: 54px; } }
 
     .dt-main { max-width: 900px; margin: 0 auto; padding: 22px 16px 60px; }
-    .dt-title { font-size: calc(36px * var(--s)); font-weight: 700; color: #0f2a6b; line-height: 1.3; margin-bottom: 18px; word-break: break-word; }
+    /* ส่วนหัวเรื่อง: ชื่อเรื่องใหญ่ กลางจอ สีเดียวกับปกหนังสือ */
+    .dt-hero {
+      --hl: #1d4ed8; --hd: #1e3a8a;
+      position: relative; overflow: hidden; text-align: center; color: #fff;
+      background: linear-gradient(150deg, var(--hl) 0%, var(--hd) 100%);
+      border-radius: clamp(22px, 4vw, 34px);
+      padding: clamp(26px, 6vw, 56px) clamp(18px, 5vw, 56px) clamp(28px, 6vw, 52px);
+      margin-bottom: 24px;
+      box-shadow: 0 14px 40px rgba(15,23,42,0.32), inset 0 1px 0 rgba(255,255,255,0.25);
+    }
+    .dt-hero::before, .dt-hero::after { content: ''; position: absolute; border-radius: 50%; pointer-events: none; }
+    .dt-hero::before { width: 70%; aspect-ratio: 1; top: -38%; left: -18%; background: radial-gradient(circle, rgba(255,255,255,0.22), transparent 65%); animation: heroGlow 6s ease-in-out infinite alternate; }
+    .dt-hero::after { width: 55%; aspect-ratio: 1; bottom: -34%; right: -14%; background: radial-gradient(circle, rgba(255,255,255,0.16), transparent 65%); animation: heroGlow 7s ease-in-out infinite alternate-reverse; }
+    @keyframes heroGlow { from { transform: translate(0, 0) scale(1); } to { transform: translate(6%, 8%) scale(1.12); } }
+    .hero-icon {
+      position: relative; z-index: 1; margin: 0 auto clamp(14px, 3vw, 22px);
+      width: clamp(104px, 24vw, 150px); aspect-ratio: 1; border-radius: 50%;
+      background: rgba(255,255,255,0.2); border: 3px solid rgba(255,255,255,0.6);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.25);
+      animation: heroFloat 3.2s ease-in-out infinite;
+    }
+    .hero-icon::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.75); animation: heroPulse 2.4s ease-out infinite; }
+    @keyframes heroFloat { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-10px) rotate(3deg); } }
+    @keyframes heroPulse { from { transform: scale(1); opacity: 0.9; } to { transform: scale(1.4); opacity: 0; } }
+    .hero-book { width: 70%; height: auto; overflow: visible; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25)); }
+    .hero-book .pg { fill: #ffffff; }
+    .hero-book .ln { fill: none; stroke: #93c5fd; stroke-width: 3; stroke-linecap: round; }
+    .hero-book .spine { stroke: #cbd5e1; stroke-width: 2; }
+    .hero-book .hb-flip { transform-box: view-box; transform-origin: 50px 50px; animation: hbFlip 3.2s ease-in-out infinite; }
+    .hero-book .hb-flip .pg { animation: hbShade 3.2s ease-in-out infinite; }
+    @keyframes hbFlip { 0%, 18% { transform: scaleX(1); } 82%, 100% { transform: scaleX(-1); } }
+    @keyframes hbShade { 0%, 18% { fill: #ffffff; } 50% { fill: #c7dbff; } 82%, 100% { fill: #ffffff; } }
+    .dt-title {
+      position: relative; z-index: 1;
+      font-size: calc(clamp(42px, 10.5vw, 72px) * var(--s));
+      font-weight: 700; line-height: 1.25; color: #fff; letter-spacing: 0.2px;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.35);
+      text-wrap: balance; word-break: break-word; max-width: 18em; margin: 0 auto;
+    }
+    .hero-tags { position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: clamp(16px, 3vw, 24px); }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: calc(clamp(17px, 3.6vw, 21px) * var(--s)); font-weight: 500;
+      background: rgba(255,255,255,0.94); color: #1e293b;
+      padding: 6px 16px; border-radius: 999px; box-shadow: 0 3px 10px rgba(0,0,0,0.18);
+    }
+    .hero-tag svg { width: 1.1em; height: 1.1em; flex-shrink: 0; }
     .dt-desc {
       font-size: calc(23px * var(--s)); line-height: 1.8; color: #1f2937; white-space: pre-line; word-break: break-word;
       background: #fff; border-radius: 20px; padding: 20px 22px; margin-bottom: 26px;
@@ -272,6 +319,9 @@
     .mb-blue { background: #eff6ff; color: #2563eb; } .mb-red { background: #fff1f2; color: #e11d48; } .mb-green { background: #ecfdf5; color: #059669; }
     .pg-input { width: 58px; padding: 6px; text-align: center; font-size: 14px; border: 1.5px solid #e2e8f0; border-radius: 8px; background: #f8fafc; }
     .pv-status { font-size: 12.5px; color: #94a3b8; line-height: 1.5; }
+    .f-section { margin: 26px 0 0; padding-top: 16px; border-top: 1.5px dashed #e2e8f0; font-size: 18px; font-weight: 600; color: #1e3a8a; }
+    .f-section .opt { color: #94a3b8; font-weight: 400; font-size: 14px; }
+    .f-label i { margin-right: 4px; }
     .media-choice { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
     .mc { position: relative; }
     .mc input { position: absolute; opacity: 0; pointer-events: none; }
@@ -288,7 +338,8 @@
     .fa-save { flex: 1; min-height: 50px; border: none; border-radius: 14px; background: #2563eb; color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; box-shadow: 0 4px 12px rgba(37,99,235,0.3); }
 
     @media (prefers-reduced-motion: reduce) {
-      .book-icon-anim, .pg-stage img.anim-next, .pg-stage img.anim-prev, .audio-btn.playing .audio-icon::after { animation: none; }
+      .book-icon-anim, .pg-stage img.anim-next, .pg-stage img.anim-prev, .audio-btn.playing .audio-icon::after,
+      .dt-hero::before, .dt-hero::after, .hero-icon, .hero-icon::after, .hero-book .hb-flip, .hero-book .hb-flip .pg { animation: none; }
     }
   </style>
 </head>
@@ -345,7 +396,23 @@
   </div>
 
   <main class="dt-main">
-    <h1 class="dt-title" id="dtTitle"></h1>
+    <header class="dt-hero" id="dtHero">
+      <div class="hero-icon" aria-hidden="true">
+        <svg class="hero-book" viewBox="0 0 100 100">
+          <path class="pg" d="M50 26 C40 19 24 17 12 20 L12 76 C24 73 40 75 50 82 Z"/>
+          <path class="ln" d="M20 34 Q32 31 43 36 M20 45 Q32 42 43 47 M20 56 Q32 53 43 58"/>
+          <path class="pg" d="M50 26 C60 19 76 17 88 20 L88 76 C76 73 60 75 50 82 Z"/>
+          <path class="ln" d="M57 36 Q68 31 80 34 M57 47 Q68 42 80 45 M57 58 Q68 53 80 56"/>
+          <g class="hb-flip">
+            <path class="pg" d="M50 26 C60 19 76 17 88 20 L88 76 C76 73 60 75 50 82 Z"/>
+            <path class="ln" d="M57 36 Q68 31 80 34 M57 47 Q68 42 80 45 M57 58 Q68 53 80 56"/>
+          </g>
+          <line class="spine" x1="50" y1="26" x2="50" y2="82"/>
+        </svg>
+      </div>
+      <h1 class="dt-title" id="dtTitle"></h1>
+      <div class="hero-tags" id="dtTags"></div>
+    </header>
     <div class="dt-desc" id="dtDesc" hidden></div>
     <p class="dt-empty" id="dtEmpty" hidden>เรื่องนี้ยังไม่มีเนื้อหา</p>
 
@@ -369,14 +436,7 @@
       <p class="pg-hint">ปัดนิ้วไปทางซ้ายหรือขวาเพื่อเปลี่ยนหน้า<br>แตะที่หน้ากระดาษเพื่อขยาย</p>
     </section>
 
-    <!-- วิดีโอ YouTube -->
-    <section class="dt-sec" id="secVideo" hidden>
-      <h2 class="sec-head"><i class="fab fa-youtube" style="color:#dc2626"></i> ดูวิดีโอ</h2>
-      <div id="videoWrap"></div>
-      <a class="yt-open" id="ytOpen" href="#" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> เปิดดูใน YouTube</a>
-    </section>
-
-    <!-- ไฟล์เสียง -->
+    <!-- ไฟล์เสียง (ต่อจากเอกสาร) -->
     <section class="dt-sec" id="secAudio" hidden>
       <h2 class="sec-head"><i class="fas fa-headphones"></i> ฟังคำอธิบาย</h2>
       <button type="button" class="audio-btn" id="auBtn" onclick="auBtnClick()">
@@ -394,6 +454,13 @@
       </div>
       <p class="audio-note"><i class="fas fa-circle-info"></i> หากไม่ได้ยินเสียง กรุณาเพิ่มเสียงโทรศัพท์ หรือปิดโหมดเงียบ</p>
       <audio id="auEl" preload="auto" playsinline></audio>
+    </section>
+
+    <!-- วิดีโอ YouTube (ต่อจากไฟล์เสียง) -->
+    <section class="dt-sec" id="secVideo" hidden>
+      <h2 class="sec-head"><i class="fab fa-youtube" style="color:#dc2626"></i> ดูวิดีโอ</h2>
+      <div id="videoWrap"></div>
+      <a class="yt-open" id="ytOpen" href="#" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> เปิดดูใน YouTube</a>
     </section>
 
     <button type="button" class="back-btn back-bottom" onclick="goBack()"><i class="fas fa-arrow-left"></i> กลับไปหน้าชั้นหนังสือ</button>
@@ -471,22 +538,25 @@
         </div>
       </div>
 
-      <label class="f-label">สื่อประกอบ</label>
-      <div class="media-choice">
-        <label class="mc"><input type="radio" name="mediaType" value="none" checked><span><i class="fas fa-ban"></i>ไม่มี</span></label>
-        <label class="mc"><input type="radio" name="mediaType" value="youtube"><span><i class="fab fa-youtube"></i>วิดีโอ YouTube</span></label>
-        <label class="mc"><input type="radio" name="mediaType" value="audio"><span><i class="fas fa-volume-high"></i>ไฟล์เสียง</span></label>
-      </div>
-      <div class="media-box" id="ytBox" hidden>
-        <input type="text" id="ytUrl" class="f-input" placeholder="วางลิงก์ YouTube เช่น https://youtu.be/xxxxxxxxxxx">
-        <p class="f-help">วางลิงก์จากปุ่ม "แชร์" ของ YouTube หรือโค้ดฝัง (iframe) ก็ได้</p>
-        <div class="yt-prev" id="ytPrev" hidden><img id="ytThumb" alt=""><span class="yt-ok"><i class="fas fa-check-circle"></i> ลิงก์ใช้ได้</span></div>
-      </div>
-      <div class="media-box" id="auBox" hidden>
+      <p class="f-section">สื่อประกอบ <span class="opt">(แนบได้ทั้งสองอย่าง หรือไม่แนบก็ได้)</span></p>
+
+      <label class="f-label"><i class="fas fa-volume-high" style="color:#ea580c"></i> ไฟล์เสียงคำอธิบาย <span class="opt">(ไม่บังคับ)</span></label>
+      <div class="media-box" id="auBox">
         <input type="file" id="audioFile" accept="audio/*,.mp3,.m4a,.wav,.aac,.ogg" hidden>
-        <button type="button" class="mini-btn mb-blue" style="font-size:14px;padding:10px 14px" onclick="byId('audioFile').click()"><i class="fas fa-upload"></i>เลือกไฟล์เสียง</button>
-        <p class="f-help" id="auFileName" style="color:#334155;font-size:14px">ยังไม่ได้เลือกไฟล์</p>
+        <div class="mini-row" style="margin-bottom:0">
+          <button type="button" class="mini-btn mb-blue" style="font-size:14px;padding:10px 14px" onclick="byId('audioFile').click()"><i class="fas fa-upload"></i><span id="auPickLabel">เลือกไฟล์เสียง</span></button>
+          <button type="button" class="mini-btn mb-red" style="font-size:14px;padding:10px 14px" id="auRemoveBtn" onclick="removeAudio()" hidden><i class="fas fa-trash"></i>ลบไฟล์เสียง</button>
+        </div>
+        <p class="f-help" id="auFileName" style="color:#334155;font-size:14px">ยังไม่มีไฟล์เสียง</p>
         <p class="f-help">ไฟล์ MP3 หรือ M4A ขนาดไม่เกิน 20 MB ระบบจะอัปโหลดขึ้น Google Drive ให้อัตโนมัติ</p>
+      </div>
+
+      <label class="f-label" for="ytUrl"><i class="fab fa-youtube" style="color:#dc2626"></i> ลิงก์วิดีโอ YouTube <span class="opt">(ไม่บังคับ)</span></label>
+      <div class="media-box" id="ytBox">
+        <input type="text" id="ytUrl" class="f-input" placeholder="วางลิงก์ YouTube เช่น https://youtu.be/xxxxxxxxxxx">
+        <p class="f-help">วางลิงก์จากปุ่ม "แชร์" ของ YouTube หรือโค้ดฝัง (iframe) ก็ได้ — ลบข้อความออกให้ว่างเพื่อเอาวิดีโอออก</p>
+        <div class="yt-prev" id="ytPrev" hidden><img id="ytThumb" alt=""><span class="yt-ok"><i class="fas fa-check-circle"></i> ลิงก์ใช้ได้</span></div>
+        <p class="f-help" id="ytBad" style="color:#dc2626" hidden><i class="fas fa-circle-exclamation"></i> ลิงก์นี้ไม่ใช่ลิงก์ YouTube ที่ใช้ได้</p>
       </div>
 
       <div class="form-actions">
@@ -615,9 +685,10 @@ function titleSize(t) {
 function makeBook(book, idx) {
   var pair = PALETTE[idx % PALETTE.length], L = pair[0], D = pair[1];
   var title = String(book['Book Title'] || '(ไม่มีชื่อ)'), t = escHtml(title);
-  var mt = mediaTypeOf(book);
-  var mediaPill = mt === 'audio' ? '<div class="cover-media"><i class="fas fa-volume-high"></i> มีเสียง</div>'
-                : mt === 'youtube' ? '<div class="cover-media"><i class="fab fa-youtube" style="color:#dc2626"></i> มีวิดีโอ</div>' : '';
+  var au = hasAudio(book), vd = hasVideo(book);
+  var mediaPill = (au && vd) ? '<div class="cover-media"><i class="fas fa-volume-high"></i> เสียง <i class="fab fa-youtube" style="color:#dc2626"></i> วิดีโอ</div>'
+                : au ? '<div class="cover-media"><i class="fas fa-volume-high"></i> มีเสียง</div>'
+                : vd ? '<div class="cover-media"><i class="fab fa-youtube" style="color:#dc2626"></i> มีวิดีโอ</div>' : '';
 
   var scene = document.createElement('div'); scene.className = 'book-scene';
   scene.innerHTML =
@@ -726,12 +797,10 @@ function ytId(s) {
   if (m) return m[1];
   return /^[A-Za-z0-9_-]{11}$/.test(s) ? s : '';
 }
-function mediaTypeOf(b) {
-  var t = String(b['Media Type'] || '').toLowerCase();
-  if (t === 'youtube') return ytId(b['Video URL']) ? 'youtube' : 'none';
-  if (t === 'audio') return b['Audio File ID'] ? 'audio' : 'none';
-  if (!t) { if (ytId(b['Video URL'])) return 'youtube'; if (b['Audio File ID']) return 'audio'; }
-  return 'none';
+function hasAudio(b) { return !!String(b['Audio File ID'] || '').trim(); }
+function hasVideo(b) { return !!ytId(b['Video URL']); }
+function heroTag(color, svgInner, label) {
+  return '<span class="hero-tag"><svg viewBox="0 0 24 24" aria-hidden="true" style="color:' + color + '">' + svgInner + '</svg>' + label + '</span>';
 }
 function bookId(b) { return (b['ID'] !== '' && b['ID'] != null) ? String(b['ID']) : 'r' + b.rowIndex; }
 function findBook(id) { for (var i = 0; i < bookData.length; i++) if (bookId(bookData[i]) === id) return bookData[i]; return null; }
@@ -759,12 +828,23 @@ function openDetail(book, push) {
   byId('secPdf').hidden = !fid;
   if (fid) pvLoad(fid);
 
-  var mt = mediaTypeOf(book);
-  byId('secVideo').hidden = (mt !== 'youtube');
-  byId('secAudio').hidden = (mt !== 'audio');
-  if (mt === 'youtube') showVideo(book['Video URL']);
-  if (mt === 'audio') auSetup(book);
-  byId('dtEmpty').hidden = !!(fid || desc || mt !== 'none');
+  var au = hasAudio(book), vd = hasVideo(book);
+  byId('secAudio').hidden = !au;
+  byId('secVideo').hidden = !vd;
+  if (au) auSetup(book);
+  if (vd) showVideo(book['Video URL']);
+  byId('dtEmpty').hidden = !!(fid || desc || au || vd);
+
+  // สีส่วนหัว = สีเดียวกับปกหนังสือที่แตะเข้ามา + ป้ายบอกว่าเรื่องนี้มีอะไรบ้าง
+  var bi = bookData.indexOf(book), pair = PALETTE[(bi < 0 ? 0 : bi) % PALETTE.length];
+  byId('dtHero').style.setProperty('--hl', pair[0]);
+  byId('dtHero').style.setProperty('--hd', pair[1]);
+  var tags = [];
+  if (fid) tags.push(heroTag('#2563eb', '<path d="M6 2h9l5 5v15H6z" fill="currentColor" opacity=".18"/><path d="M6 2h9l5 5v15H6zM15 2v5h5M9 12h8M9 16h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>', 'อ่านเอกสาร'));
+  if (au) tags.push(heroTag('#ea580c', '<path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>', 'ฟังคำอธิบาย'));
+  if (vd) tags.push(heroTag('#dc2626', '<rect x="2" y="5" width="20" height="14" rx="4" fill="currentColor"/><path d="M10 9l5 3-5 3z" fill="#fff"/>', 'ดูวิดีโอ'));
+  byId('dtTags').innerHTML = tags.join('');
+  byId('dtTags').hidden = !tags.length;
   try { byId('btnBackTop').focus({ preventScroll: true }); } catch (e) {}
 }
 
@@ -1235,17 +1315,28 @@ function confirmDelete(idx) {
 var formState = { idx: -1, existingFileId: '', existingAudioId: '', audioFile: null };
 var formPreview = { data: '', changed: false, custom: false };
 
-function selectedMediaType() { var r = document.querySelector('input[name=mediaType]:checked'); return r ? r.value : 'none'; }
-function setMediaType(v) {
-  var r = document.querySelector('input[name=mediaType][value="' + v + '"]'); if (r) r.checked = true;
-  byId('ytBox').hidden = v !== 'youtube';
-  byId('auBox').hidden = v !== 'audio';
+// สถานะไฟล์เสียงในฟอร์ม: มีไฟล์ใหม่ / มีไฟล์เดิม / ถูกสั่งลบ / ไม่มี
+function renderAudioField() {
+  var f = formState.audioFile, el = byId('auFileName');
+  var music = '<i class="fas fa-music" style="color:#ea580c"></i> ';
+  if (f) el.innerHTML = music + escHtml(f.name) + ' (' + fmtMB(f.size) + ')';
+  else if (formState.existingAudioId && !formState.removeAudio) el.innerHTML = music + 'มีไฟล์เสียงเดิมแล้ว — เลือกไฟล์ใหม่เพื่อเปลี่ยน';
+  else if (formState.existingAudioId && formState.removeAudio) el.innerHTML = '<span style="color:#dc2626"><i class="fas fa-trash"></i> จะลบไฟล์เสียงเดิมเมื่อกดบันทึก</span>';
+  else el.textContent = 'ยังไม่มีไฟล์เสียง';
+  var hasAny = !!f || (!!formState.existingAudioId && !formState.removeAudio);
+  byId('auRemoveBtn').hidden = !hasAny;
+  byId('auPickLabel').textContent = hasAny ? 'เปลี่ยนไฟล์เสียง' : 'เลือกไฟล์เสียง';
 }
-document.querySelectorAll('input[name=mediaType]').forEach(function(r) { r.addEventListener('change', function() { setMediaType(selectedMediaType()); }); });
+function removeAudio() {
+  formState.audioFile = null;
+  formState.removeAudio = !!formState.existingAudioId;
+  renderAudioField();
+}
 
 function updateYtPreview() {
-  var id = ytId(byId('ytUrl').value);
+  var raw = byId('ytUrl').value.trim(), id = ytId(raw);
   byId('ytPrev').hidden = !id;
+  byId('ytBad').hidden = !raw || !!id;
   if (id) byId('ytThumb').src = 'https://img.youtube.com/vi/' + id + '/mqdefault.jpg';
 }
 byId('ytUrl').addEventListener('input', updateYtPreview);
@@ -1266,7 +1357,8 @@ byId('audioFile').addEventListener('change', function() {
     this.value = ''; return;
   }
   formState.audioFile = f;
-  byId('auFileName').innerHTML = '<i class="fas fa-music" style="color:#ea580c"></i> ' + escHtml(f.name) + ' (' + fmtMB(f.size) + ')';
+  formState.removeAudio = false;
+  renderAudioField();
   this.value = '';
 });
 
@@ -1275,7 +1367,7 @@ function openForm(idx) {
   var isEdit = typeof idx === 'number' && idx >= 0 && bookData[idx];
   var book = isEdit ? bookData[idx] : null;
   byId('bookForm').reset();
-  formState = { idx: isEdit ? idx : -1, existingFileId: book ? String(book['File ID'] || '') : '', existingAudioId: book ? String(book['Audio File ID'] || '') : '', audioFile: null };
+  formState = { idx: isEdit ? idx : -1, existingFileId: book ? String(book['File ID'] || '') : '', existingAudioId: book ? String(book['Audio File ID'] || '') : '', audioFile: null, removeAudio: false };
   formPreview = { data: book ? getPreviewOf(book) : '', changed: false, custom: false };
   byId('modalTitle').textContent = isEdit ? 'แก้ไขหนังสือ' : 'เพิ่มหนังสือใหม่';
   byId('bookTitle').value = book ? String(book['Book Title'] || '') : '';
@@ -1285,11 +1377,9 @@ function openForm(idx) {
   setPvStatus(!book ? 'เลือกไฟล์ PDF แล้วระบบจะสร้างภาพจากหน้าแรกให้อัตโนมัติ'
     : (formPreview.data ? 'มีภาพตัวอย่างอยู่แล้ว — เปลี่ยนได้โดยอัปโหลดรูป หรือระบุหน้าแล้วกด "ดึงภาพ"' : 'ยังไม่มีภาพตัวอย่าง — ระบุหน้าแล้วกด "ดึงภาพ" หรืออัปโหลดรูปเอง'), '');
   renderFormPreview();
-  var mt = book ? mediaTypeOf(book) : 'none';
-  setMediaType(mt);
-  byId('ytUrl').value = book && mt === 'youtube' ? String(book['Video URL'] || '') : '';
+  byId('ytUrl').value = book && hasVideo(book) ? String(book['Video URL'] || '') : '';
   updateYtPreview();
-  byId('auFileName').innerHTML = formState.existingAudioId ? '<i class="fas fa-music" style="color:#ea580c"></i> มีไฟล์เสียงเดิมแล้ว — เลือกไฟล์ใหม่เพื่อเปลี่ยน' : 'ยังไม่ได้เลือกไฟล์';
+  renderAudioField();
   byId('formModal').hidden = false;
   document.body.style.overflow = 'hidden';
   setTimeout(function() { try { byId('bookTitle').focus(); } catch (e) {} }, 60);
@@ -1391,19 +1481,18 @@ async function handleSave(e) {
   var book = formState.idx >= 0 ? bookData[formState.idx] : null;
   var title = byId('bookTitle').value.trim();
   if (!title) { Swal.fire({ icon: 'warning', title: 'กรุณาใส่ชื่อเรื่อง' }); return; }
-  var mt = selectedMediaType();
   var pdfFile = byId('bookFile').files[0];
-  var info = { pin: ADMIN_PIN, bookTitle: title, description: byId('bookDesc').value.trim(), mediaType: mt };
+  var info = { pin: ADMIN_PIN, bookTitle: title, description: byId('bookDesc').value.trim() };
   if (book) { info.id = (book['ID'] !== '' && book['ID'] != null) ? String(book['ID']) : ''; info.rowIndex = book.rowIndex; }
 
-  if (mt === 'youtube') {
-    var vid = ytId(byId('ytUrl').value);
-    if (!vid) { Swal.fire({ icon: 'warning', title: 'ลิงก์ YouTube ไม่ถูกต้อง', text: 'กรุณาวางลิงก์จากปุ่ม "แชร์" ของ YouTube' }); return; }
-    info.videoUrl = 'https://youtu.be/' + vid;
-  }
-  if (mt === 'audio' && !formState.audioFile && !formState.existingAudioId) { Swal.fire({ icon: 'warning', title: 'กรุณาเลือกไฟล์เสียง' }); return; }
+  // วิดีโอ (ไม่บังคับ): ช่องว่าง = ไม่มีวิดีโอ
+  var ytRaw = byId('ytUrl').value.trim(), vid = ytId(ytRaw);
+  if (ytRaw && !vid) { Swal.fire({ icon: 'warning', title: 'ลิงก์ YouTube ไม่ถูกต้อง', text: 'กรุณาวางลิงก์จากปุ่ม "แชร์" ของ YouTube หรือลบข้อความในช่องออกถ้าไม่ต้องการแนบวิดีโอ' }); return; }
+  info.videoUrl = vid ? 'https://youtu.be/' + vid : '';
+  // เสียง (ไม่บังคับ)
+  if (!formState.audioFile && formState.removeAudio) info.removeAudio = true;
   if (formPreview.changed) info.previewImage = formPreview.data || '';
-  var totalBytes = (pdfFile ? pdfFile.size : 0) + (mt === 'audio' && formState.audioFile ? formState.audioFile.size : 0);
+  var totalBytes = (pdfFile ? pdfFile.size : 0) + (formState.audioFile ? formState.audioFile.size : 0);
   if (totalBytes > MAX_TOTAL_MB * 1048576) {
     Swal.fire({ icon: 'warning', title: 'ไฟล์รวมกันใหญ่เกินไป', text: 'PDF และไฟล์เสียงรวมกัน ' + fmtMB(totalBytes) + ' — กรุณาบันทึกไม่เกิน ' + MAX_TOTAL_MB + ' MB ต่อครั้ง (บันทึก PDF ก่อน แล้วกดแก้ไขเพื่อเพิ่มไฟล์เสียงภายหลังได้)' });
     return;
@@ -1412,7 +1501,7 @@ async function handleSave(e) {
   Swal.fire({ title: 'กำลังนำหนังสือขึ้นชั้น...', text: (pdfFile || formState.audioFile) ? 'กำลังอัปโหลดไฟล์ อาจใช้เวลาสักครู่' : '', allowOutsideClick: false, didOpen: function() { Swal.showLoading(); } });
   try {
     if (pdfFile) info.fileBase64 = await readAsDataURL(pdfFile);
-    if (mt === 'audio' && formState.audioFile) {
+    if (formState.audioFile) {
       info.audioBase64 = await readAsDataURL(formState.audioFile);
       info.audioName = formState.audioFile.name;
       info.audioMime = audioMimeOf(formState.audioFile);
