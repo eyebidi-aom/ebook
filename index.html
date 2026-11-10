@@ -164,32 +164,33 @@
     @media (max-width: 400px) { .back-btn { padding: 0 18px; font-size: 23px; } .fs-btn { width: 54px; height: 54px; } }
 
     .dt-main { max-width: 900px; margin: 0 auto; padding: 22px 16px 60px; }
-    /* ส่วนหัวเรื่อง: ชื่อเรื่องใหญ่ กลางจอ สีเดียวกับปกหนังสือ */
+    /* ส่วนหัวเรื่อง: ไอคอน + ชื่อเรื่อง บรรทัดเดียวกัน กลางจอ สีเดียวกับปกหนังสือ */
     .dt-hero {
       --hl: #1d4ed8; --hd: #1e3a8a;
-      position: relative; overflow: hidden; text-align: center; color: #fff;
+      position: relative; overflow: hidden; color: #fff; text-align: center;
       background: linear-gradient(150deg, var(--hl) 0%, var(--hd) 100%);
-      border-radius: clamp(22px, 4vw, 34px);
-      padding: clamp(26px, 6vw, 56px) clamp(18px, 5vw, 56px) clamp(28px, 6vw, 52px);
-      margin-bottom: 24px;
-      box-shadow: 0 14px 40px rgba(15,23,42,0.32), inset 0 1px 0 rgba(255,255,255,0.25);
+      border-radius: clamp(18px, 3vw, 24px);
+      padding: clamp(14px, 3vw, 24px) clamp(14px, 3.5vw, 30px);
+      margin-bottom: 20px;
+      box-shadow: 0 8px 24px rgba(15,23,42,0.25), inset 0 1px 0 rgba(255,255,255,0.25);
     }
     .dt-hero::before, .dt-hero::after { content: ''; position: absolute; border-radius: 50%; pointer-events: none; }
     .dt-hero::before { width: 70%; aspect-ratio: 1; top: -38%; left: -18%; background: radial-gradient(circle, rgba(255,255,255,0.22), transparent 65%); animation: heroGlow 6s ease-in-out infinite alternate; }
     .dt-hero::after { width: 55%; aspect-ratio: 1; bottom: -34%; right: -14%; background: radial-gradient(circle, rgba(255,255,255,0.16), transparent 65%); animation: heroGlow 7s ease-in-out infinite alternate-reverse; }
     @keyframes heroGlow { from { transform: translate(0, 0) scale(1); } to { transform: translate(6%, 8%) scale(1.12); } }
     .hero-icon {
-      position: relative; z-index: 1; margin: 0 auto clamp(14px, 3vw, 22px);
-      width: clamp(104px, 24vw, 150px); aspect-ratio: 1; border-radius: 50%;
-      background: rgba(255,255,255,0.2); border: 3px solid rgba(255,255,255,0.6);
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 10px 26px rgba(0,0,0,0.25);
+      position: relative; top: -0.06em;
+      width: 1.15em; height: 1.15em; margin-right: 0.28em; border-radius: 50%;
+      vertical-align: middle;
+      background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.6);
+      display: inline-flex; align-items: center; justify-content: center;
+      box-shadow: 0 5px 14px rgba(0,0,0,0.22);
       animation: heroFloat 3.2s ease-in-out infinite;
     }
-    .hero-icon::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.75); animation: heroPulse 2.4s ease-out infinite; }
-    @keyframes heroFloat { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-10px) rotate(3deg); } }
+    .hero-icon::after { content: ''; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.75); animation: heroPulse 2.4s ease-out infinite; }
+    @keyframes heroFloat { 0%,100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-4px) rotate(3deg); } }
     @keyframes heroPulse { from { transform: scale(1); opacity: 0.9; } to { transform: scale(1.4); opacity: 0; } }
-    .hero-book { width: 70%; height: auto; overflow: visible; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.25)); }
+    .hero-book { width: 74%; height: auto; overflow: visible; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.25)); }
     .hero-book .pg { fill: #ffffff; }
     .hero-book .ln { fill: none; stroke: #93c5fd; stroke-width: 3; stroke-linecap: round; }
     .hero-book .spine { stroke: #cbd5e1; stroke-width: 2; }
@@ -198,20 +199,12 @@
     @keyframes hbFlip { 0%, 18% { transform: scaleX(1); } 82%, 100% { transform: scaleX(-1); } }
     @keyframes hbShade { 0%, 18% { fill: #ffffff; } 50% { fill: #c7dbff; } 82%, 100% { fill: #ffffff; } }
     .dt-title {
-      position: relative; z-index: 1;
-      font-size: calc(clamp(42px, 10.5vw, 72px) * var(--s));
+      position: relative; z-index: 1; margin: 0;
+      font-size: calc(clamp(38px, 9vw, 64px) * var(--s));
       font-weight: 700; line-height: 1.25; color: #fff; letter-spacing: 0.2px;
-      text-shadow: 0 3px 12px rgba(0,0,0,0.35);
-      text-wrap: balance; word-break: break-word; max-width: 18em; margin: 0 auto;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.35);
+      text-wrap: balance; word-break: break-word;
     }
-    .hero-tags { position: relative; z-index: 1; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: clamp(16px, 3vw, 24px); }
-    .hero-tag {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: calc(clamp(17px, 3.6vw, 21px) * var(--s)); font-weight: 500;
-      background: rgba(255,255,255,0.94); color: #1e293b;
-      padding: 6px 16px; border-radius: 999px; box-shadow: 0 3px 10px rgba(0,0,0,0.18);
-    }
-    .hero-tag svg { width: 1.1em; height: 1.1em; flex-shrink: 0; }
     .dt-desc {
       font-size: calc(23px * var(--s)); line-height: 1.8; color: #1f2937; white-space: pre-line; word-break: break-word;
       background: #fff; border-radius: 20px; padding: 20px 22px; margin-bottom: 26px;
@@ -397,7 +390,7 @@
 
   <main class="dt-main">
     <header class="dt-hero" id="dtHero">
-      <div class="hero-icon" aria-hidden="true">
+      <h1 class="dt-title"><span class="hero-icon" aria-hidden="true">
         <svg class="hero-book" viewBox="0 0 100 100">
           <path class="pg" d="M50 26 C40 19 24 17 12 20 L12 76 C24 73 40 75 50 82 Z"/>
           <path class="ln" d="M20 34 Q32 31 43 36 M20 45 Q32 42 43 47 M20 56 Q32 53 43 58"/>
@@ -408,10 +401,7 @@
             <path class="ln" d="M57 36 Q68 31 80 34 M57 47 Q68 42 80 45 M57 58 Q68 53 80 56"/>
           </g>
           <line class="spine" x1="50" y1="26" x2="50" y2="82"/>
-        </svg>
-      </div>
-      <h1 class="dt-title" id="dtTitle"></h1>
-      <div class="hero-tags" id="dtTags"></div>
+        </svg></span><span id="dtTitle"></span></h1>
     </header>
     <div class="dt-desc" id="dtDesc" hidden></div>
     <p class="dt-empty" id="dtEmpty" hidden>เรื่องนี้ยังไม่มีเนื้อหา</p>
@@ -573,7 +563,7 @@ if (window.pdfjsLib) pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.clo
 // ==========================================
 // ⚙️ ตั้งค่า
 // ==========================================
-var GAS_URL = 'https://script.google.com/macros/s/AKfycbwnHwxZI96_IAXmvvDmLRlqQFB_rrq-tnt1ylTV-3TgTFZXilifGFqdPd6su3W9zik8/exec';
+var GAS_URL = 'https://script.google.com/macros/s/AKfycbygfy7yad290Ox_Kdat3HqLPZm_2HhsiSwsFPl7SEZm6M3UXz604LT1hK9LvYMkhWuDYw/exec';
 var PREVIEW_COL = 'Preview Image';
 var PREVIEW_MAX_CHARS = 1200000;
 var MAX_PDF_MB = 25;
@@ -799,9 +789,6 @@ function ytId(s) {
 }
 function hasAudio(b) { return !!String(b['Audio File ID'] || '').trim(); }
 function hasVideo(b) { return !!ytId(b['Video URL']); }
-function heroTag(color, svgInner, label) {
-  return '<span class="hero-tag"><svg viewBox="0 0 24 24" aria-hidden="true" style="color:' + color + '">' + svgInner + '</svg>' + label + '</span>';
-}
 function bookId(b) { return (b['ID'] !== '' && b['ID'] != null) ? String(b['ID']) : 'r' + b.rowIndex; }
 function findBook(id) { for (var i = 0; i < bookData.length; i++) if (bookId(bookData[i]) === id) return bookData[i]; return null; }
 function hashParam(k) { var h = location.hash.replace(/^#/, ''); if (!h) return ''; try { return new URLSearchParams(h).get(k) || ''; } catch (e) { return ''; } }
@@ -835,16 +822,10 @@ function openDetail(book, push) {
   if (vd) showVideo(book['Video URL']);
   byId('dtEmpty').hidden = !!(fid || desc || au || vd);
 
-  // สีส่วนหัว = สีเดียวกับปกหนังสือที่แตะเข้ามา + ป้ายบอกว่าเรื่องนี้มีอะไรบ้าง
+  // สีส่วนหัว = สีเดียวกับปกหนังสือที่แตะเข้ามา
   var bi = bookData.indexOf(book), pair = PALETTE[(bi < 0 ? 0 : bi) % PALETTE.length];
   byId('dtHero').style.setProperty('--hl', pair[0]);
   byId('dtHero').style.setProperty('--hd', pair[1]);
-  var tags = [];
-  if (fid) tags.push(heroTag('#2563eb', '<path d="M6 2h9l5 5v15H6z" fill="currentColor" opacity=".18"/><path d="M6 2h9l5 5v15H6zM15 2v5h5M9 12h8M9 16h8" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>', 'อ่านเอกสาร'));
-  if (au) tags.push(heroTag('#ea580c', '<path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>', 'ฟังคำอธิบาย'));
-  if (vd) tags.push(heroTag('#dc2626', '<rect x="2" y="5" width="20" height="14" rx="4" fill="currentColor"/><path d="M10 9l5 3-5 3z" fill="#fff"/>', 'ดูวิดีโอ'));
-  byId('dtTags').innerHTML = tags.join('');
-  byId('dtTags').hidden = !tags.length;
   try { byId('btnBackTop').focus({ preventScroll: true }); } catch (e) {}
 }
 
